@@ -1,19 +1,20 @@
-import React from "react";
+import React, { forwardRef } from "react";
+import cx from "classnames";
 import Ball from "../Ball";
 
 import styles from "./Cup.module.css";
 
-function Cup({ hasBall }) {
+const Cup = forwardRef(({ hasBall }, ref) => {
   return !hasBall ? (
-    <div className={styles.cup} />
+    <div ref={ref} className={cx(styles.cup, "cup")} />
   ) : (
     <>
       <div className={styles.cup_wrapper}>
-        <div className={styles.cup} />
+        <div ref={ref} className={styles.cup} />
         <Ball isHidden />
       </div>
     </>
   );
-}
+});
 
 export default Cup;

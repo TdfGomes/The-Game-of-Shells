@@ -2,6 +2,7 @@
   width: 60px;
   height: 60px;
   position: absolute;
+  top:150%;
   border-radius: 100%;
   background: radial-gradient(farthest-side at 76% 7%,#0ae4e4 10%,#136d6d 76%);
   z-index: -1;
