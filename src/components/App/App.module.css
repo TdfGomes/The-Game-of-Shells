@@ -4,6 +4,7 @@
   perspective: 380px;
   perspective-origin: bottom;
 }
+
 .table{
   background: linear-gradient(#ad5c5c 15%,26%, #dc7575 33%);
   height: 200%;
@@ -12,7 +13,15 @@
   transform: rotateX(45deg);
   width: 100%;
 }
+
+
 .background{
   background:linear-gradient(#59606f 6%, 15%, #373b48 33%);
   height: 100%;
 }
+
+
+
+
+
+
