@@ -19,7 +19,7 @@
   font-family: 'Courier New', Courier, monospace;
   outline: none;
   transform: translate3d(0,0,0);
-  transition: all 50ms ease-in-out;
+  transition: all 50ms;
   will-change: box-shadow, transform;
 }
 
