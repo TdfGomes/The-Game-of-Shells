@@ -1,12 +1,13 @@
 import React, { forwardRef } from "react";
-import cx from "classnames";
 import Ball from "../Ball";
 
 import styles from "./Cup.module.css";
 
-const Cup = forwardRef(({ hasBall }, ref) => {
+const Cup = forwardRef(({ hasBall, children }, ref) => {
   return !hasBall ? (
-    <div ref={ref} className={cx(styles.cup, "cup")} />
+    <div ref={ref} className={styles.cup}>
+      {children}
+    </div>
   ) : (
     <>
       <div className={styles.cup_wrapper}>
@@ -16,5 +17,7 @@ const Cup = forwardRef(({ hasBall }, ref) => {
     </>
   );
 });
+
+Cup.displayName = "Cup";
 
 export default Cup;

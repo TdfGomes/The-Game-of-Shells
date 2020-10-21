@@ -7,4 +7,6 @@ const Ball = forwardRef(({ isHidden }, ref) => {
   return <div ref={ref} className={css} />;
 });
 
+Ball.displayName = "Ball";
+
 export default Ball;

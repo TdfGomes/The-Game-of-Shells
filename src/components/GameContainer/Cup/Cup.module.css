@@ -3,25 +3,18 @@
 }
 
 .cup {
-  position: absolute;
-  top: 0;
   height: 130px;
   width: 90px;
   background: radial-gradient(closest-corner at 79% 12%, #ce3d3d 27%, #982323 240%);
   border-top-left-radius: 35px;
   border-top-right-radius: 35px;
-  transform: translate(-50%, 0px)
+  transform: translate(0px, 0px);
+  position: relative;
+  color: white;
+  font-size: 35px;
+  text-align: center;
 }
 
-.cup:first-of-type{
-  left: 33.3%;
-}
-.cup:nth-of-type(2){
-  left: 50%;
-}
-.cup:nth-of-type(3){
-  left: 66.6%;
-}
 
 
 
