@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState, createRef } from "react";
-import cx from "classnames";
 import { gsap } from "gsap";
 
 import Cup from "./Cup";
 import GameActions from "./GameActions/GameActions";
 import Ball from "./Ball";
 
-import { generateRandomInt, MathUtils, shuffle } from "../../utils";
+import { generateRandomInt, MathUtils, shuffle, constants } from "../../utils";
 
 import styles from "./GameContainer.module.css";
+import GameStatus from "./GameStatus/GameStatus";
+
+const { GAME_STATUS } = constants;
 
 function GameContainer() {
   const ball = useRef(null);
@@ -18,7 +20,7 @@ function GameContainer() {
   const cupsRefs = useRef(cups.map(() => createRef()));
   const [cupsPos, setCupsPos] = useState([]);
   const [selectedCup, selectCup] = useState(null);
-  const [gameStatus, setGameStatus] = useState("none");
+  const [gameStatus, setGameStatus] = useState(GAME_STATUS.none);
 
   useEffect(() => {
     const positions = [];
@@ -45,7 +47,7 @@ function GameContainer() {
   const handleStart = (e) => {
     e.preventDefault();
     const tl = gsap.timeline({ paused: true });
-    setGameStatus("started");
+    setGameStatus(GAME_STATUS.started);
     if (tl.isActive()) return;
 
     const domCupElemts = cupsRefs.current.map((c) => c.current);
@@ -126,18 +128,9 @@ function GameContainer() {
           </Cup>
         ))}
         <Ball ref={ball} />
-        {(gameStatus === "gameOver" || gameStatus === "win") && (
-          <div
-            className={cx(styles.message, gameStatus === "win" && styles.win)}>
-            {gameStatus === "gameOver" ? (
-              <>
-                <h1>Game Over</h1>
-                <h3>Press Start!!</h3>
-              </>
-            ) : (
-              <h1>You Win!</h1>
-            )}
-          </div>
+        {(gameStatus === GAME_STATUS.gameOver ||
+          gameStatus === GAME_STATUS.win) && (
+          <GameStatus gameStatus={gameStatus} />
         )}
       </div>
     </>

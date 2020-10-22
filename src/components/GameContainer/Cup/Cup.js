@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
+import { props } from "../../../utils";
 import styles from "./Cup.module.css";
 import { gsap } from "gsap";
 
@@ -45,8 +46,7 @@ Cup.propTypes = {
     PropTypes.string,
   ]).isRequired,
   onClick: PropTypes.func.isRequired,
-  gameStatus: PropTypes.oneOf(["none", "started", "win", "gameOver"])
-    .isRequired,
+  gameStatus: props.gameStatus,
 };
 
 Cup.displayName = "Cup";
