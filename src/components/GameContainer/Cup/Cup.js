@@ -1,10 +1,28 @@
 import React, { forwardRef } from "react";
+import PropTypes from "prop-types";
 import styles from "./Cup.module.css";
 import { gsap } from "gsap";
 
-const Cup = forwardRef(({ hasBall, children }, ref) => {
+const Cup = forwardRef(({ hasBall, children, onClick, gameStatus }, ref) => {
   const handleClick = (e) => {
-    gsap.timeline().to(e.target, { top: 0 });
+    e.preventDefault();
+    if (gameStatus !== "started") {
+      return;
+    }
+
+    const upTween = gsap.to(e.target, {
+      top: 0,
+      duration: 0.8,
+      ease: "power2.inOut",
+    });
+
+    if (!hasBall) {
+      onClick("gameOver");
+      return upTween.yoyo(true).repeat(1);
+    }
+
+    onClick("win");
+    return upTween.play();
   };
   return (
     <div
@@ -16,6 +34,20 @@ const Cup = forwardRef(({ hasBall, children }, ref) => {
     </div>
   );
 });
+
+Cup.propTypes = {
+  hasBall: PropTypes.bool.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.func,
+    PropTypes.array,
+    PropTypes.number,
+    PropTypes.string,
+  ]).isRequired,
+  onClick: PropTypes.func.isRequired,
+  gameStatus: PropTypes.oneOf(["none", "started", "win", "gameOver"])
+    .isRequired,
+};
 
 Cup.displayName = "Cup";
 
