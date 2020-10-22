@@ -10,7 +10,7 @@
   height: 200%;
   position: absolute;
   transform-style: preserve-3d;
-  transform: rotateX(45deg);
+  transform: rotateX(30deg);
   width: 100%;
 }
 
