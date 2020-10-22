@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./GameActions.module.css";
 
 function GameActions({ onStart }) {
@@ -8,5 +9,9 @@ function GameActions({ onStart }) {
     </div>
   );
 }
+
+GameActions.propTypes = {
+  onStart: PropTypes.func.isRequired,
+};
 
 export default GameActions;
