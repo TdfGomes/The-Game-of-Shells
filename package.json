@@ -34,6 +34,9 @@
     ]
   },
   "devDependencies": {
-    "prop-types": "^15.7.2"
+    "@testing-library/react-hooks": "^3.4.2",
+    "prettier": "^2.1.2",
+    "prop-types": "^15.7.2",
+    "react-test-renderer": "^17.0.1"
   }
 }

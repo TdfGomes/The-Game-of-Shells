@@ -8,10 +8,10 @@ function useCups(ballRef) {
   useEffect(() => {
     const positions = [];
     cupsRefs.current.forEach((cup, num) => {
-      const { offsetLeft } = cup.current;
+      const x = cup.current?.offsetLeft;
 
       positions.push({
-        x: MathUtils.minusOffset(offsetLeft, ballRef.current.offsetWidth),
+        x: MathUtils.minusOffset(x, ballRef.current.offsetWidth),
         num,
       });
     });

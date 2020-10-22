@@ -7,6 +7,13 @@ import { constants } from "../../../utils";
 
 const { GAME_STATUS } = constants;
 
+export const anime = (selector) =>
+  gsap.to(selector, {
+    top: 0,
+    duration: 0.8,
+    ease: "power2.inOut",
+  });
+
 const Cup = forwardRef(({ hasBall, children, onClick, gameStatus }, ref) => {
   const handleClick = (e) => {
     e.preventDefault();
@@ -14,11 +21,7 @@ const Cup = forwardRef(({ hasBall, children, onClick, gameStatus }, ref) => {
       return;
     }
 
-    const upTween = gsap.to(e.target, {
-      top: 0,
-      duration: 0.8,
-      ease: "power2.inOut",
-    });
+    const upTween = anime(e.target);
 
     if (!hasBall) {
       onClick(GAME_STATUS.gameOver);
@@ -33,7 +36,8 @@ const Cup = forwardRef(({ hasBall, children, onClick, gameStatus }, ref) => {
       ref={ref}
       className={styles.cup}
       hasball={hasBall.toString()}
-      onClick={handleClick}>
+      onClick={handleClick}
+      aria-label="cup">
       {children}
     </div>
   );
