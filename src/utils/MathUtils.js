@@ -14,4 +14,6 @@ const minusOffset = (offSetX, elementWidth) => {
   return Math.ceil(offSetX - 200 + Math.ceil(elementWidth / 4));
 };
 
-export default { addOffset, minusOffset };
+const mUtils = { addOffset, minusOffset };
+
+export default mUtils;

@@ -5,6 +5,8 @@ export const GAME_STATUS = Object.freeze({
   win: "win",
 });
 
-export default {
+const constants = {
   GAME_STATUS,
 };
+
+export default constants;
