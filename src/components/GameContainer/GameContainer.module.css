@@ -10,3 +10,44 @@
   display:flex;
   justify-content: space-evenly;
 }
+
+.message {
+  position: absolute;
+  bottom: 150px;
+  color: #d0d0d0;
+  text-align: center;
+  text-shadow: 1px 4px 4px #212d44;
+  font-family: 'Courier New', Courier, monospace;
+  animation: appearIn 0.95s cubic-bezier(0.68, -1.55, 0.27, 2.55);
+}
+
+
+.message h1{
+  font-size: 70px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.message h3{
+  font-size: 35px;
+  margin-top: 0;
+  margin-bottom: 35px;
+}
+
+.win h1 {
+  margin-bottom: 35px;
+}
+
+@keyframes appearIn{
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

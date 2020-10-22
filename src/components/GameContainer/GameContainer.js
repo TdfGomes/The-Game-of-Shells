@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, createRef } from "react";
+import cx from "classnames";
 import { gsap } from "gsap";
 
 import Cup from "./Cup";
@@ -17,8 +18,7 @@ function GameContainer() {
   const cupsRefs = useRef(cups.map(() => createRef()));
   const [cupsPos, setCupsPos] = useState([]);
   const [selectedCup, selectCup] = useState(null);
-
-  const tl = gsap.timeline({ paused: true });
+  const [gameStatus, setGameStatus] = useState("none");
 
   useEffect(() => {
     const positions = [];
@@ -44,7 +44,8 @@ function GameContainer() {
 
   const handleStart = (e) => {
     e.preventDefault();
-
+    const tl = gsap.timeline({ paused: true });
+    setGameStatus("started");
     if (tl.isActive()) return;
 
     const domCupElemts = cupsRefs.current.map((c) => c.current);
@@ -118,11 +119,26 @@ function GameContainer() {
           <Cup
             key={idx}
             ref={cupsRefs.current[idx]}
-            hasBall={selectedCup?.num === cupsPos[idx]?.num}>
+            hasBall={selectedCup?.num === cupsPos[idx]?.num}
+            gameStatus={gameStatus}
+            onClick={setGameStatus}>
             {idx}
           </Cup>
         ))}
         <Ball ref={ball} />
+        {(gameStatus === "gameOver" || gameStatus === "win") && (
+          <div
+            className={cx(styles.message, gameStatus === "win" && styles.win)}>
+            {gameStatus === "gameOver" ? (
+              <>
+                <h1>Game Over</h1>
+                <h3>Press Start!!</h3>
+              </>
+            ) : (
+              <h1>You Win!</h1>
+            )}
+          </div>
+        )}
       </div>
     </>
   );
