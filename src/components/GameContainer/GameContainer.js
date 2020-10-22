@@ -72,6 +72,11 @@ function GameContainer() {
               return [...c];
             });
 
+            const selCup = domCupElemts.find(
+              (el) => el.attributes.hasBall.value === "true"
+            );
+            const c = cups.indexOf(Number(selCup.textContent));
+
             cups.forEach((el, idx) => {
               const prevXPos = Math.ceil(
                 cupsPos.find((cup) => cup.num === idx).x +
@@ -85,12 +90,20 @@ function GameContainer() {
                     Math.ceil(ball.current.offsetWidth / 4)
                 ) - 40;
 
-              gsap.to(domCupElemts[el], {
-                x: prevXPos - x,
-                duration: 0.8,
-                repeat: 3,
-                ease: "power3.inOut",
-              });
+              gsap
+                .timeline()
+                .to(domCupElemts[el], {
+                  x: prevXPos - x,
+                  duration: 0.8,
+                  repeat: 3,
+                  ease: "power3.inOut",
+                })
+                .to(ball.current, {
+                  x: cupsPos[c].x,
+                  duration: 0.1,
+                })
+                .fromTo(ball.current, { alpha: 0 }, { alpha: 1 })
+                .play();
             });
           },
         },
