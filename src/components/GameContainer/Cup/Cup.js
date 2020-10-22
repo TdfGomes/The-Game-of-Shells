@@ -3,11 +3,14 @@ import PropTypes from "prop-types";
 import { props } from "../../../utils";
 import styles from "./Cup.module.css";
 import { gsap } from "gsap";
+import { constants } from "../../../utils";
+
+const { GAME_STATUS } = constants;
 
 const Cup = forwardRef(({ hasBall, children, onClick, gameStatus }, ref) => {
   const handleClick = (e) => {
     e.preventDefault();
-    if (gameStatus !== "started") {
+    if (gameStatus !== GAME_STATUS.started) {
       return;
     }
 
@@ -18,11 +21,11 @@ const Cup = forwardRef(({ hasBall, children, onClick, gameStatus }, ref) => {
     });
 
     if (!hasBall) {
-      onClick("gameOver");
+      onClick(GAME_STATUS.gameOver);
       return upTween.yoyo(true).repeat(1);
     }
 
-    onClick("win");
+    onClick(GAME_STATUS.win);
     return upTween.play();
   };
   return (
