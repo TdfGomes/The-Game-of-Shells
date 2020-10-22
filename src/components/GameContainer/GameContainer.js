@@ -5,7 +5,7 @@ import Cup from "./Cup";
 import GameActions from "./GameActions/GameActions";
 import Ball from "./Ball";
 
-import { generateRandomInt, shuffle } from "../../utils";
+import { generateRandomInt, MathUtils, shuffle } from "../../utils";
 
 import styles from "./GameContainer.module.css";
 
@@ -26,9 +26,7 @@ function GameContainer() {
       const { offsetLeft } = cup.current;
 
       positions.push({
-        x: Math.ceil(
-          offsetLeft - 200 + Math.ceil(ball.current.offsetWidth / 4)
-        ), // Take 200 out from the container padding plus 1/4 from ball width. This way we could have the ball centered inside the cup
+        x: MathUtils.minusOffset(offsetLeft, ball.current.offsetWidth),
         num,
       });
     });
@@ -78,16 +76,15 @@ function GameContainer() {
             const c = cups.indexOf(Number(selCup.textContent));
 
             cups.forEach((el, idx) => {
-              const prevXPos = Math.ceil(
-                cupsPos.find((cup) => cup.num === idx).x +
-                  200 -
-                  Math.ceil(ball.current.offsetWidth * 4)
+              const prevXPos = MathUtils.addOffset(
+                cupsPos.find((cup) => cup.num === idx).x,
+                ball.current.offsetWidth
               );
+
               const x =
-                Math.ceil(
-                  domCupElemts[el].offsetLeft -
-                    200 +
-                    Math.ceil(ball.current.offsetWidth / 4)
+                MathUtils.minusOffset(
+                  domCupElemts[el].offsetLeft,
+                  ball.current.offsetWidth
                 ) - 40;
 
               gsap
