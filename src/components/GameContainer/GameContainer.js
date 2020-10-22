@@ -9,6 +9,7 @@ import { generateRandomInt, MathUtils, shuffle, constants } from "../../utils";
 
 import styles from "./GameContainer.module.css";
 import GameStatus from "./GameStatus/GameStatus";
+import useCups from "../../hooks/useCups";
 
 const { GAME_STATUS } = constants;
 
@@ -16,25 +17,10 @@ function GameContainer() {
   const ball = useRef(null);
   const ballTween = useRef(null);
 
-  const [cups, setCups] = useState([0, 1, 2]);
-  const cupsRefs = useRef(cups.map(() => createRef()));
-  const [cupsPos, setCupsPos] = useState([]);
   const [selectedCup, selectCup] = useState(null);
   const [gameStatus, setGameStatus] = useState(GAME_STATUS.none);
 
-  useEffect(() => {
-    const positions = [];
-    cupsRefs.current.forEach((cup, num) => {
-      const { offsetLeft } = cup.current;
-
-      positions.push({
-        x: MathUtils.minusOffset(offsetLeft, ball.current.offsetWidth),
-        num,
-      });
-    });
-
-    setCupsPos(positions);
-  }, []);
+  const { cups, setCups, cupsRefs, cupsPos } = useCups(ball);
 
   useEffect(() => {
     ballTween.current = gsap.to(ball.current, {
